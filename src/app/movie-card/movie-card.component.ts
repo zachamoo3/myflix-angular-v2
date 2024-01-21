@@ -26,7 +26,6 @@ export class MovieCardComponent {
 
   ngOnInit(): void {
     this.getMovies();
-    this.getFavorites();
   }
 
   getMovies(): void {
@@ -37,42 +36,21 @@ export class MovieCardComponent {
     });
   }
 
-  getFavorites(): void {
-    this.fetchApiData.getUser().subscribe({
-      next: (response: any) => {
-        if (response.user && response.user.Favorite_Movies) {
-          this.favorites = response.user.Favorite_Movies;
-        } else {
-          this.favorites = [];
-        }
-      },
-      error: (error: any) => {
-        console.error('Error fetching user.Favorite_Movies:', error)
-        this.favorites = [];
-      }
+  isFav(movieId: string): boolean {
+    return this.fetchApiData.isFavoriteMovie(movieId);
+  }
+
+  addFav(movieId: string): void {
+    this.fetchApiData.addFavoriteMovie(movieId).subscribe(() => {
+      this.snackBar.open('Movie added to your favorites!', 'OK', {
+        duration: 2000,
+      });
     });
   }
 
-  isFav(movieId: string): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user.Favorite_Movies.indexOf(movieId) >= 0;
-  }
 
-  addFav(id: string): void {
-    if (this.isFav(id)) {
-      this.removeFav(id);
-    } else {
-      this.fetchApiData.addFavoriteMovie(id).subscribe(() => {
-        this.snackBar.open('Movie added to your favorites!', 'OK', {
-          duration: 2000,
-        });
-        this.getFavorites();
-      });
-    }
-  }
-
-  removeFav(id: string): void {
-    this.fetchApiData.deleteFavoriteMovie(id).subscribe(() => {
+  removeFav(movieId: string): void {
+    this.fetchApiData.deleteFavoriteMovie(movieId).subscribe(() => {
       this.snackBar.open('Movie removed from your favorites.', 'OK', {
         duration: 2000,
       })

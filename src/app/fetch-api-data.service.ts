@@ -97,7 +97,7 @@ export class FetchApiDataService {
       })
     }).pipe(
       map(this.extractResponseData),
-      map((data) => data.FavoriteMovies),
+      map((data) => data.Favorite_Movies),
       catchError(this.handleError)
     );
   }
@@ -105,7 +105,7 @@ export class FetchApiDataService {
   isFavoriteMovie(movieId: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user) {
-      return user.FavoriteMovies.includes(movieId);
+      return user.Favorite_Movies.includes(movieId);
     }
     return false;
   }
@@ -115,10 +115,10 @@ export class FetchApiDataService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    user.FavoriteMovies.push(movieId);
+    user.Favorite_Movies.push(movieId);
     localStorage.setItem('user', JSON.stringify(user));
 
-    return this.http.put(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}, {
+    return this.http.post(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       })
@@ -133,9 +133,9 @@ export class FetchApiDataService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
 
-    const index = user.FavoriteMovies.indexOf(movieId);
+    const index = user.Favorite_Movies.indexOf(movieId);
     if (index >= 0) {
-      user.FavoriteMovies.splice(index, 1);
+      user.Favorite_Movies.splice(index, 1);
     }
     localStorage.setItem('user', JSON.stringify(user));
 
@@ -153,7 +153,7 @@ export class FetchApiDataService {
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + user.Username, updatedUser, {
+    return this.http.post(apiUrl + 'users/' + user.Username, updatedUser, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       })

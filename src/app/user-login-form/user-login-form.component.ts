@@ -32,14 +32,12 @@ export class UserLoginFormComponent {
         localStorage.setItem('user', JSON.stringify(result.user));
         localStorage.setItem('token', result.token);
         this.dialogRef.close(); // This will close the modal on a success!
-        console.log(result);
         this.snackBar.open('Login successful!', 'OK', {
           duration: 2000
         });
         this.router.navigate(['movies']);
       },
       error: (result) => {
-        console.log(result);
         this.snackBar.open('Login failed.', 'OK', {
           duration: 2000
         });
