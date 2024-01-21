@@ -26,11 +26,14 @@
         <button mat-button color="primary" (click)="openSynopsis(movie)">
           Synopsis
         </button>
-        <button mat-icon-button [ngClass]="isFav(movie._id) ? 'mat-flat-button' : 'mat-icon-button'"
-          (click)="isFav(movie._id) ? removeFav(movie._id) : addFav(movie._id)"
-          [color]="isFav(movie._id) ? 'accent' : 'warn'">
+        <button mat-icon-button *ngIf="isFav(movie._id)" (click)="removeFav(movie._id)" color="warn">
           <mat-icon>
-            {{ isFav(movie._id) ? 'favorite' : 'favorite_border' }}
+            favorite
+          </mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!isFav(movie._id)" (click)="addFav(movie._id)" color="accent">
+          <mat-icon>
+            favorite_border
           </mat-icon>
         </button>
       </mat-card-actions>
