@@ -1,29 +1,40 @@
 <!-- root/src/movie-card/movie-card.component.html -->
 
-<div style="display: flex;">
-  <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
-    <mat-card-header>
-      <mat-card-title>
-        {{movie.Title}}
-      </mat-card-title>
-      <mat-card-subtitle>
-        Directed by: {{movie.Director.Name}}
-      </mat-card-subtitle>
-    </mat-card-header>
+<div class="movie-page">
+  <app-navbar></app-navbar>
+  <div class="movie-view" style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <mat-card *ngFor="let movie of movies;" style="width: 20em; margin: 1em;">
 
-    <img src={{movie.Image_Url}} alt={{movie.Title}} style="width: 100%;" />
+      <mat-card-header style="margin-bottom: 1em;">
+        <mat-card-title style="font-weight: bold;">
+          {{movie.Title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Directed by: {{movie.Director.Name}}
+        </mat-card-subtitle>
+      </mat-card-header>
 
-    <mat-card-actions>
-      <button mat-button color="primary">
-        Genre
-      </button>
-      <button mat-button color="primary">
-        Director
-      </button>
-      <button mat-button color="primary">
-        Synopsis
-      </button>
-      <mat-icon>favorite_border</mat-icon>
-    </mat-card-actions>
-  </mat-card>
+      <img src={{movie.Image_Url}} alt={{movie.Title}} style="width: 20em; margin-bottom: 1em;" />
+
+      <mat-card-actions style="margin-bottom: 1em;">
+        <button mat-button color="primary" (click)="openGenre(movie.Genre)">
+          Genre
+        </button>
+        <button mat-button color="primary" (click)="openDirector(movie.Director)">
+          Director
+        </button>
+        <button mat-button color="primary" (click)="openSynopsis(movie)">
+          Synopsis
+        </button>
+        <button mat-icon-button [ngClass]="isFav(movie._id) ? 'mat-flat-button' : 'mat-icon-button'"
+          (click)="isFav(movie._id) ? removeFav(movie._id) : addFav(movie._id)"
+          [color]="isFav(movie._id) ? 'accent' : 'warn'">
+          <mat-icon>
+            {{ isFav(movie._id) ? 'favorite' : 'favorite_border' }}
+          </mat-icon>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  </div>
 </div>

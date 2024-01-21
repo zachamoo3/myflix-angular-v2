@@ -1,15 +1,18 @@
 <!-- root/src/app/welcome-page/welcome-page.component.html -->
 
-<div class="main-page" style="display: flex; justify-content: center; align-items: center; height: 80%;">
+<div class="welcome-page" style="display: flex; justify-content: center; align-items: center; height: 80%;">
   <div>
     <h1>
       Welcome to myFlix!
     </h1>
-    <button mat-raised-button (click)="openUserRegistrationDialog()" style="margin-right: 10px;" color="primary">
-      Sign Up
-    </button>
-    <button mat-raised-button color="primary" (click)="openUserLoginDialog();">
-      Login
-    </button>
+    <div class="btn-container" style="display: flex; justify-content: center;">
+      <button class="btn" mat-raised-button (click)="openUserRegistrationDialog()" style="margin-right: 1em;"
+        color="primary">
+        Sign Up
+      </button>
+      <button class="btn" mat-raised-button color="primary" (click)="openUserLoginDialog();">
+        Login
+      </button>
+    </div>
   </div>
 </div>
