@@ -17,6 +17,7 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 export class MovieCardComponent {
   movies: any[] = [];
   favorites: any[] = [];
+  director: any;
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -58,36 +59,45 @@ export class MovieCardComponent {
   }
 
   openGenre(genre: any): void {
-    this.dialog.open(GenreComponent, {
-      data: {
-        name: genre.Name,
-        description: genre.Description
-      },
-      width: '30em'
-    })
+    this.fetchApiData.getGenre(genre.Name).subscribe((resp: any) => {
+      this.dialog.open(GenreComponent, {
+        data: {
+          Name: resp.Name,
+          Description: resp.Description
+        },
+        width: '40em'
+      });
+    });
   }
 
   openDirector(director: any): void {
-    this.dialog.open(DirectorComponent, {
-      data: {
-        name: director.Name,
-        birth: director.Birth_Year,
-        death: director.Death_Year,
-        bio: director.Bio
-      },
-      width: '30em'
-    })
+    this.fetchApiData.getDirector(director.Name).subscribe((resp: any) => {
+      this.dialog.open(DirectorComponent, {
+        data: {
+          Name: resp.Name,
+          Birth_Year: resp.Birth_Year,
+          Death_Year: resp.Death_Year,
+          Bio: resp.Bio
+        },
+        width: '40em'
+      });
+    });
   }
 
   openSynopsis(movie: any): void {
-    this.dialog.open(SynopsisComponent, {
-      data: {
-        title: movie.Title,
-        release: movie.Release_Date,
-        rating: movie.Rating,
-        description: movie.Description
-      },
-      width: '40em'
-    })
+    this.fetchApiData.getOneMovie(movie.Title).subscribe((resp: any) => {
+      this.dialog.open(SynopsisComponent, {
+        data: {
+          Title: resp.Title,
+          Release_Date: resp.Release_Date,
+          Rating: resp.Rating,
+          Genre: resp.Genre.Name,
+          Director: resp.Director.Name,
+          Description: resp.Description,
+          Image_Url: resp.Image_Url
+        },
+        width: '60em'
+      });
+    });
   }
 }

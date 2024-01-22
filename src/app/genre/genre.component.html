@@ -1,0 +1,20 @@
+<!-- root/src/app/genre/genre.component.html -->
+
+<mat-card>
+
+  <mat-card-header style="display: flex; justify-content: space-between;">
+    <mat-card-title>
+      <h2>{{ data.Name }}</h2>
+    </mat-card-title>
+    <button mat-stroked-button mat-dialog-close color="primary">
+      X
+    </button>
+  </mat-card-header>
+
+  <mat-card-content style="padding-bottom: 2em;">
+    <p>
+      <b>Description: </b>{{ data.Description }}
+    </p>
+  </mat-card-content>
+
+</mat-card>
