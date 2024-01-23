@@ -4,30 +4,33 @@
   <app-navbar></app-navbar>
   <div style="margin-left: 2em; margin-right: 2em;">
 
-    <div style="display: flex; justify-content: space-between; max-width: 60em;">
-      <div>
-        <h1>Profile</h1>
-        <p>Username: <b>{{ user.Username }}</b></p>
-        <p>Email: <b>{{ user.Email }}</b></p>
-        <p *ngIf="user.Birth_Date">Birthday: <b>{{ user.Birth_Date.slice(0,10) }}</b></p>
+    <div style="display: flex; justify-content: center;">
+      <div style="display: flex; justify-content: space-between; flex: 1 1 auto; max-width: 60em;">
+        <div>
+          <h1>Profile</h1>
+          <p>Username: <b>{{ user.Username }}</b></p>
+          <p>Email: <b>{{ user.Email }}</b></p>
+          <p *ngIf="user.Birth_Date">Birthday: <b>{{ user.Birth_Date.slice(0,10) }}</b></p>
 
-        <h2>Favorite Movies</h2>
-        <div *ngIf="favorite_movies.length === 0">
-          <p>
-            You currently have no movies favorited.
-          </p>
+          <h2>Favorite Movies</h2>
+          <div *ngIf="favorite_movies.length === 0">
+            <p>
+              You currently have no movies favorited.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 2em; display: flex; flex-direction: column;">
+          <button mat-raised-button (click)="openEditProfileDialog()" style="margin-bottom: 1em;" color="primary">
+            Edit Profile
+          </button>
+          <button mat-raised-button (click)="deleteUser()" color="warn">
+            Delete Profile
+          </button>
         </div>
       </div>
-
-      <div style="margin-top: 2em; display: flex; flex-direction: column;">
-        <button mat-raised-button (click)="openEditProfileDialog()" style="margin-bottom: 1em;" color="primary">
-          Edit Profile
-        </button>
-        <button mat-raised-button (click)="deleteUser()" color="warn">
-          Delete Profile
-        </button>
-      </div>
     </div>
+
 
 
     <div style="display: flex; flex-wrap: wrap; justify-content: center;">
