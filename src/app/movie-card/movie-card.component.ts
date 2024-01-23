@@ -1,9 +1,9 @@
 // root/src/app/movie-card/movie-card.component.ts
 
-import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
@@ -15,9 +15,18 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 })
 
 export class MovieCardComponent {
-  movies: any[] = [];
-  favorites: any[] = [];
-  director: any;
+  @Input() movie = {
+    _id: '',
+    Title: '',
+    Release_Date: '',
+    Director: {
+      Name: ''
+    },
+    Genre: {
+      Name: ''
+    },
+    Image_Url: ''
+  }
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -25,17 +34,7 @@ export class MovieCardComponent {
     public snackBar: MatSnackBar
   ) { }
 
-  ngOnInit(): void {
-    this.getMovies();
-  }
-
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
-    });
-  }
+  ngOnInit(): void { }
 
   isFav(movieId: string): boolean {
     return this.fetchApiData.isFavoriteMovie(movieId);

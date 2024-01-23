@@ -1,10 +1,10 @@
-<!-- root/src/app/user-registration-form/user-registration-form.component.html -->
+<!-- root/src/app/update-form/update-form.component.html -->
 
-<mat-card class="user-registration-form" style="display: flex; align-items: center;">
+<mat-card style="display: flex; align-items: center;">
 
   <mat-card-header style="margin-bottom: 1em; font-weight: bold; font-size: x-large;">
     <mat-card-title>
-      Sign Up!
+      Edit Profile
     </mat-card-title>
   </mat-card-header>
 
@@ -20,14 +20,14 @@
         <input matInput [(ngModel)]="userData.Email" placeholder="Email" type="email" name="Email" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="userData.Birthday" placeholder="Birthday" type="date" name="Birthday">
+        <input matInput [(ngModel)]="userData.Birth_Date" placeholder="Birthday" type="date" name="Birthday">
       </mat-form-field>
     </form>
   </mat-card-content>
 
   <mat-card-actions style="margin-bottom: 2em;">
-    <button mat-raised-button (click)="registerUser()" class="btn-signup">
-      Sign Up
+    <button mat-raised-button (click)="updateUser()" class="btn-signup">
+      Submit
     </button>
   </mat-card-actions>
 

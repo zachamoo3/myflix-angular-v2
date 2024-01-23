@@ -1,0 +1,19 @@
+<!-- root/src/app/navbar/navbar.component.html -->
+
+<mat-toolbar
+  style="position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; box-shadow: 1px 3px 10px #332a3c;">
+
+  <a mat-button (click)="toMovies()" target="_blank" style="font-size: x-large; font-weight: bold;">
+    myFlix
+  </a>
+
+  <div>
+    <button mat-icon-button (click)="toProfile()">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+
+</mat-toolbar>

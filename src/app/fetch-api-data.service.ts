@@ -15,7 +15,7 @@ export class FetchApiDataService {
 
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    console.log(userDetails.Username, 'registered.');
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -23,7 +23,7 @@ export class FetchApiDataService {
 
   // Making the api call for the user login endpoint
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    console.log(userDetails.Username, 'logged in.');
     return this.http.post(apiUrl + 'users/login', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -79,12 +79,6 @@ export class FetchApiDataService {
       map(this.extractResponseData),
       catchError(this.handleError)
     );
-  }
-
-  // Making the api call for the get user endpoint
-  getUser(): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user;
   }
 
   // Making the api call for the get a user's array of favorite movies endpoint
@@ -153,7 +147,7 @@ export class FetchApiDataService {
   editUser(updatedUser: any): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users/' + user.Username, updatedUser, {
+    return this.http.put(apiUrl + 'users/' + user.Username, updatedUser, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       })
@@ -164,25 +158,24 @@ export class FetchApiDataService {
   }
 
   // Making the api call for the delete user endpoint
-  deleteUser(): Observable<any> {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+  deleteUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + user._id, {
+    return this.http.delete(apiUrl + 'users/' + username, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       })
     }).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+      console.error('Some error occurred:', error);
     } else {
       console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is ${error.error}`
+        error
       );
     }
     return throwError(() => new Error(

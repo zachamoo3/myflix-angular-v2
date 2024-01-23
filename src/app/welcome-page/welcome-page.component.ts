@@ -1,9 +1,9 @@
 // root/src/app/welcome-page/welcome-page.component.ts
 
-import { Component, OnInit } from '@angular/core';
-import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
+import { Component } from '@angular/core';
+import { RegisterFormComponent } from '../register-form/register-form.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-welcome-page',
@@ -18,7 +18,7 @@ export class WelcomePageComponent {
 
   // This is the function that will open the dialog when the signup button is clicked
   openUserRegistrationDialog(): void {
-    this.dialog.open(UserRegistrationFormComponent, {
+    this.dialog.open(RegisterFormComponent, {
       // Assigning the dialog a width
       width: '300px'
     });
@@ -26,7 +26,7 @@ export class WelcomePageComponent {
 
   // This is the function that will open the dialog when the login button is clicked
   openUserLoginDialog(): void {
-    this.dialog.open(UserLoginFormComponent, {
+    this.dialog.open(LoginFormComponent, {
       // Assigning the dialog a width
       width: '300px'
     });
