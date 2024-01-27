@@ -10,6 +10,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 
 export class SynopsisComponent {
+
+  /**
+   * @constructor
+   * @param data 
+   * @returns movie title, release data, rating, genre, director, description, and image url
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -23,7 +29,5 @@ export class SynopsisComponent {
     },
   ) { }
 
-  ngOnInit(): void {
-    // console.log(this.data);
-  }
+  ngOnInit(): void { }
 }

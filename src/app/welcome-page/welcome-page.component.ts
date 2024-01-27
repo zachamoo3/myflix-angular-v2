@@ -12,11 +12,20 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 })
 
 export class WelcomePageComponent {
+
+  /**
+   * @constructor
+   * @param dialog 
+   * @returns access to display a dialog
+   */
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void { }
 
-  // This is the function that will open the dialog when the signup button is clicked
+  /**
+   * @description This is the function that will open the dialog when the signup button is clicked
+   * @returns dialog featuring the RegisterFormComponent
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(RegisterFormComponent, {
       // Assigning the dialog a width
@@ -24,7 +33,10 @@ export class WelcomePageComponent {
     });
   }
 
-  // This is the function that will open the dialog when the login button is clicked
+  /**
+   * @description This is the function that will open the dialog when the login button is clicked
+   * @returns dialog featuring the LoginFormComponent
+   */
   openUserLoginDialog(): void {
     this.dialog.open(LoginFormComponent, {
       // Assigning the dialog a width

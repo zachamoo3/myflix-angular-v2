@@ -15,6 +15,10 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 })
 
 export class MovieCardComponent {
+
+  /**
+   * @description The MovieCardComponent receives movie data as a parameter
+   */
   @Input() movie = {
     _id: '',
     Title: '',
@@ -28,6 +32,15 @@ export class MovieCardComponent {
     Image_Url: ''
   }
 
+  /**
+   * @constructor
+   * @param fetchApiData 
+   * @returns access to functions in fetchApiData
+   * @param dialog 
+   * @returns access to display a dialog
+   * @param snackBar 
+   * @returns use of the snackbar notification
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -36,10 +49,20 @@ export class MovieCardComponent {
 
   ngOnInit(): void { }
 
+  /**
+   * @description calls the api to use the isFavoriteMovie function
+   * @param movieId 
+   * @returns boolean on whether a movie is in the user's favorites
+   */
   isFav(movieId: string): boolean {
     return this.fetchApiData.isFavoriteMovie(movieId);
   }
 
+  /**
+   * @description calls the api to use the addFavoriteMovie function
+   * @param movieId 
+   * @returns movie added to user's list of favorites
+   */
   addFav(movieId: string): void {
     this.fetchApiData.addFavoriteMovie(movieId).subscribe(() => {
       this.snackBar.open('Movie added to your favorites!', 'OK', {
@@ -48,7 +71,11 @@ export class MovieCardComponent {
     });
   }
 
-
+  /**
+   * @description calls the api to use the deleteFavoriteMovie function
+   * @param movieId 
+   * @returns movie removed from user's list of favorites
+   */
   removeFav(movieId: string): void {
     this.fetchApiData.deleteFavoriteMovie(movieId).subscribe(() => {
       this.snackBar.open('Movie removed from your favorites.', 'OK', {
@@ -57,6 +84,11 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * @description calls the api to use the getGenre function
+   * @param genre 
+   * @returns dialog showing genre details
+   */
   openGenre(genre: any): void {
     this.fetchApiData.getGenre(genre.Name).subscribe((resp: any) => {
       this.dialog.open(GenreComponent, {
@@ -69,6 +101,11 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * @description calls the api to use the getDirector function
+   * @param director 
+   * @returns dialog showing director details
+   */
   openDirector(director: any): void {
     this.fetchApiData.getDirector(director.Name).subscribe((resp: any) => {
       this.dialog.open(DirectorComponent, {
@@ -83,6 +120,11 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * @description calls the api to use the getOneMovie function
+   * @param movie
+   * @returns dialog showing movie details
+   */
   openSynopsis(movie: any): void {
     this.fetchApiData.getOneMovie(movie.Title).subscribe((resp: any) => {
       this.dialog.open(SynopsisComponent, {

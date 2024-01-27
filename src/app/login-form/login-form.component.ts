@@ -13,11 +13,26 @@ import { Router } from '@angular/router';
 })
 
 export class LoginFormComponent {
+
+  /**
+   * @description The LoginFormComponent receives loginData that the user inputs into the template
+   */
   @Input() loginData = {
     Username: '',
     Password: '',
   }
 
+  /**
+   * @constructor
+   * @param fetchApiData 
+   * @returns access to functions in fetchApiData
+   * @param dialogRef 
+   * @returns presents the Login Form Component as a dialog
+   * @param snackBar 
+   * @returns use of the snackbar notification
+   * @param router 
+   * @returns access to change the page displayed
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
@@ -27,7 +42,14 @@ export class LoginFormComponent {
 
   ngOnInit(): void { }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /** 
+   * @description This is the function responsible for sending the form inputs to the backend
+   * @param loginData
+   * @returns calls api to log in the user
+   * @returns setting user and token into the localStorage
+   * @returns reroute to the homepage ('movies')
+   * @throws error if failed to log in the user
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.loginData).subscribe({
       next: (res) => {

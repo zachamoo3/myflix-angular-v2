@@ -18,6 +18,17 @@ export class ProfilePageComponent {
   token: any = '';
   favorite_movies: any = []; // array of all the data of the user's favorite movies
 
+  /**
+   * @constructor
+   * @param fetchApiData 
+   * @returns access to functions in fetchApiData
+   * @param snackBar 
+   * @returns use of the snackbar notification
+   * @param dialog
+   * @returns access to display a dialog
+   * @param router 
+   * @returns access to change the page displayed
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -29,6 +40,10 @@ export class ProfilePageComponent {
     this.loadUser();
   }
 
+  /**
+   * @description builds a list of movie data based on the user's favorites
+   * @returns array of movie details of movies that are the user's favorites
+   */
   loadUser(): void {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -41,12 +56,22 @@ export class ProfilePageComponent {
     });
   }
 
+  /**
+   * @description opens a dialog featuring the UpdateFormComponent
+   * @returns the UpdateFormComponent featured as a dialog
+   */
   openEditProfileDialog(): void {
     this.dialog.open(UpdateFormComponent, {
       width: '300px',
     });
   }
 
+  /**
+   * @description access the api to use the deleteUser function
+   * @returns user profile deletion
+   * @returns reroute to welcome page ('welcome')
+   * @throws error if failed to delete the account
+   */
   deleteUser(): void {
     if (confirm('Do you wish to permanently delete your account?')) {
       this.fetchApiData.deleteUser(this.user.Username).subscribe({

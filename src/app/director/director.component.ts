@@ -10,6 +10,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 
 export class DirectorComponent {
+
+  /**
+   * @constructor
+   * @param data 
+   * @returns director name, birth year, death year, and bio
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

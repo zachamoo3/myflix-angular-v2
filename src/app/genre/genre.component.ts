@@ -10,6 +10,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 
 export class GenreComponent {
+  /**
+   * @constructor
+   * @param data 
+   * @returns genre name and description
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

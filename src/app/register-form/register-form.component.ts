@@ -12,6 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class RegisterFormComponent {
+
+  /**
+   * @description The RegisterFormComponent receives userData that the user inputs into the template
+   */
   @Input() userData = {
     Username: '',
     Password: '',
@@ -19,6 +23,15 @@ export class RegisterFormComponent {
     Birth_Date: '',
   };
 
+  /**
+   * @constructor
+   * @param fetchApiData 
+   * @returns access to functions in fetchApiData
+   * @param dialogRef 
+   * @returns presents the Login Form Component as a dialog
+   * @param snackBar 
+   * @returns use of the snackbar notification
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<RegisterFormComponent>,
@@ -27,7 +40,11 @@ export class RegisterFormComponent {
 
   ngOnInit(): void { }
 
-  // This is the function responsible for sending the form inputs to the back end
+  /**
+   * @description This is the function responsible for sending the form inputs to the back end
+   * @returns userRegistration
+   * @throws error if failed to register the user
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe({
       next: (res) => {

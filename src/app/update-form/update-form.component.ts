@@ -12,6 +12,10 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 
 export class UpdateFormComponent {
+
+  /**
+   * @description The UpdateFormComponent receives userData that the user inputs into the template 
+   */
   user: any = {};
   @Input() userData = {
     Username: '',
@@ -20,6 +24,15 @@ export class UpdateFormComponent {
     Birth_Date: '',
   };
 
+  /**
+   * @constructor
+   * @param fetchApiData 
+   * @returns access to functions in fetchApiData
+   * @param snackBar 
+   * @returns use of the snackbar notification
+   * @param dialogRef 
+   * @returns presents the Login Form Component as a dialog
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
@@ -28,6 +41,11 @@ export class UpdateFormComponent {
 
   ngOnInit(): void { }
 
+  /**
+   * @description calls the api to use the editUser function to update any user details
+   * @returns user entry with updated data
+   * @throws error if failed to update the user profile
+   */
   updateUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe({
       next: (data) => {
